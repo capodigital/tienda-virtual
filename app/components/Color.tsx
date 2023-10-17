@@ -1,51 +1,51 @@
-import React, { useState, useEffect } from 'react';
-import { GrAdd } from "react-icons/gr";
-import { SketchPicker } from 'react-color';
+import React, { useState, useEffect } from 'react'
+import { GrAdd } from 'react-icons/gr'
+import { SketchPicker } from 'react-color'
 
 interface Props {
-  setFormData: React.Dispatch<React.SetStateAction<any>>;
-  Color: string;
+  setFormData: React.Dispatch<React.SetStateAction<any>>
+  Color: string
 }
 
 const Color: React.FC<Props> = ({ setFormData, Color }) => {
-  const [open, setOpen] = useState<boolean>(false);
-  const [sketchColor, setSketchColor] = useState('#fff'); // State for SketchPicker
+  const [open, setOpen] = useState<boolean>(false)
+  const [sketchColor, setSketchColor] = useState('#fff') // State for SketchPicker
 
-  const colorArray: string[] = Color.split(',');
-  const [selectedColors, setSelectColors] = useState<string[]>(colorArray);
+  const colorArray: string[] = Color.split(',')
+  const [selectedColors, setSelectColors] = useState<string[]>(colorArray)
 
-  const handleColorButtonClick = () => {
-    setSelectColors((prevSelectedColors) => [...prevSelectedColors, sketchColor]);
-    setOpen(false);
+  const handleColorButtonClick = (): void => {
+    setSelectColors((prevSelectedColors) => [...prevSelectedColors, sketchColor])
+    setOpen(false)
   }
 
   useEffect(() => {
-    const handleSelectedColors = () => {
+    const handleSelectedColors = (): void => {
       setFormData((prevFormData: FormData) => ({
         ...prevFormData,
-        color: selectedColors.join(",")
-      }));
+        color: selectedColors.join(',')
+      }))
     }
-    handleSelectedColors();
-  }, [selectedColors]);
+    handleSelectedColors()
+  }, [selectedColors])
 
-  const handleDeleteColor = (indexToDelete: number) => {
+  const handleDeleteColor = (indexToDelete: number): void => {
     setSelectColors((prevSelectedColors) => {
-      const updateColors = [...prevSelectedColors];
-      updateColors.splice(indexToDelete, 1);
-      return updateColors;
-    });
+      const updateColors = [...prevSelectedColors]
+      updateColors.splice(indexToDelete, 1)
+      return updateColors
+    })
   }
 
-  const handleChangeComplete = (color:any) => {
-    setSketchColor(color.hex); // Update SketchPicker color
+  const handleChangeComplete = (color: any): void => {
+    setSketchColor(color.hex) // Update SketchPicker color
   }
 
   return (
     <div>
       <div className='flex items-center justify-between mt-3'>
         <button className='block border-[1px] rounded-lg px-3 text-[14px]'
-          onClick={() => setOpen(!open)}
+          onClick={() => { setOpen(!open) }}
         >
           Elegir color
         </button>
@@ -63,16 +63,16 @@ const Color: React.FC<Props> = ({ setFormData, Color }) => {
           <div key={index} className='flex items-center space-x-4 mb-2'>
             <div
               style={{
-                width: "40px",
-                height: "40px",
+                width: '40px',
+                height: '40px',
                 borderRadius: '100%',
                 backgroundColor: selectedColor,
-                display: "inline-block"
+                display: 'inline-block'
               }}
             >
             </div>
             <span className='border-[1px] rounded-lg p-1 px-3 text-[14px]'>{selectedColor}</span>
-            <button className='border-[1px] rounded-lg p-1 px-3 text-[14px]' onClick={() => handleDeleteColor(index)}>Eliminar</button>
+            <button className='border-[1px] rounded-lg p-1 px-3 text-[14px]' onClick={() => { handleDeleteColor(index) }}>Eliminar</button>
           </div>
         ))}
       </div>
@@ -82,4 +82,4 @@ const Color: React.FC<Props> = ({ setFormData, Color }) => {
   )
 }
 
-export default Color;
+export default Color

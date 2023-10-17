@@ -8,7 +8,7 @@ const Size: React.FC<ParaProps> = ({ setFormData }) => {
   const [selectedSizes, setSelectedSizes] = useState<string[]>([])
   const sizes = ['s', 'm', 'l', 'xl', '2xl', '3xl']
 
-  const handleSizeButtonClick = (size: string) => {
+  const handleSizeButtonClick = (size: string): void => {
     setSelectedSizes((prevSelectedSize) => {
       if (prevSelectedSize.includes(size)) {
         return prevSelectedSize.filter((s) => s !== size)
@@ -18,7 +18,7 @@ const Size: React.FC<ParaProps> = ({ setFormData }) => {
     })
   }
 
-  const handleSubmit = () => {
+  const handleSubmit = (): void => {
     setFormData((prevFormData: FormData) => ({
       ...prevFormData,
       size: selectedSizes.join(',')

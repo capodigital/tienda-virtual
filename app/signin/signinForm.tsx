@@ -1,51 +1,51 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
+/* eslint-disable @typescript-eslint/no-empty-interface */
 'use client'
-import React, {useState} from 'react'
+import React, { type ReactElement, useState } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import {signIn} from "next-auth/react"
+import { signIn } from 'next-auth/react'
 
-type Props = {}
+interface Props {}
 
-const SigninForm = (props: Props) => {
-    const router = useRouter()
-    const [user, setUser] = useState({
-        email:'',
-        password:''
-    })
+const SigninForm = (props: Props): ReactElement => {
+  const [user, setUser] = useState({
+    email: '',
+    password: ''
+  })
 
-    const Login = () => {
-        try{
-            signIn('credentials', {
-                email:user.email,
-                password:user.password,
-                redirect:true,
-                callbackUrl:'/'
-            })
-        }catch{
-            console.log('Error while logging in')
-        }
+  const Login = (): void => {
+    try {
+      signIn('credentials', {
+        email: user.email,
+        password: user.password,
+        redirect: true,
+        callbackUrl: '/'
+      })
+    } catch {
+      console.log('Error while logging in')
     }
+  }
   return (
     <div className='flex flex-col items-center justify-center min-h-screen py-2'>
         <div className='p-10 rounded-lg shadow-lg flex flex-col'>
             <h1 className='text-xl font-medium mb-4'>Sign In</h1>
             <label htmlFor="" className='mb-2'>Email</label>
-            <input 
+            <input
             type="text"
             className='p-2 border-gray-300 border-[1px] rounded-lg w-[300px] mb-4 focus:outline-none focus:border-gray-600 text-black'
             id='email'
             value={user.email}
             placeholder='email'
-            onChange={(e) => setUser({...user, email: e.target.value})}
+            onChange={(e) => { setUser({ ...user, email: e.target.value }) }}
              />
             <label htmlFor="" className='mb-2'>Password</label>
-            <input 
+            <input
             type="password"
             className='p-2 border-gray-300 border-[1px] rounded-lg w-[300px] mb-4 focus:outline-none focus:border-gray-600 text-black'
             id='password'
             value={user.password}
             placeholder='password'
-            onChange={(e) => setUser({...user, password: e.target.value})}
+            onChange={(e) => { setUser({ ...user, password: e.target.value }) }}
              />
              <button onClick={Login} className='p-2 border bg-purple-600 text-white border-gray-300 mt-2 mb-4 focus:outline-none focus:border-gray-600'>
                 Login Now

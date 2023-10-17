@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { CldUploadWidget } from 'next-cloudinary'
 
 interface Props {
@@ -10,14 +10,14 @@ interface Props {
 }
 
 const ImageUpload: React.FC<Props> = ({ info, updateInfo, imageUrls, setImageUrls, handleImageChange }) => {
-  const onupload = (result: any) => {
+  const onupload = (result: any): void => {
     updateInfo(result.info.secure_url)
     const newImageUrl = result.info.secure_url
     setImageUrls(preImageUrls => [...preImageUrls, newImageUrl])
     handleImageChange(result)
   }
 
-  const handleDeleteImage = (index: number) => {
+  const handleDeleteImage = (index: number): void => {
     setImageUrls(prevImageUrls => {
       const updateImageUrls = [...prevImageUrls]
       updateImageUrls.splice(index, 1)
@@ -29,7 +29,7 @@ const ImageUpload: React.FC<Props> = ({ info, updateInfo, imageUrls, setImageUrl
         <div className='mb-10'>
             <CldUploadWidget uploadPreset='xici4u80' onUpload={onupload}>
                 {({ open }: any) => {
-                  function handleOnclick (e: React.MouseEvent<HTMLButtonElement>) {
+                  function handleOnclick (e: React.MouseEvent<HTMLButtonElement>): void {
                     e.preventDefault()
                     open()
                   }
