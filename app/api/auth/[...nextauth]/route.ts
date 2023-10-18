@@ -1,5 +1,6 @@
 import NextAuth from 'next-auth'
 import { options } from './options'
+export const dynamic = 'force-dynamic'
 
 const handler = NextAuth(options)
 

@@ -1,6 +1,7 @@
 import prisma from '@/app/prismadb'
 import bcrypt from 'bcrypt'
 import { NextResponse } from 'next/server'
+export const dynamic = 'force-dynamic'
 
 export async function POST (request: Request): Promise<any> {
   const body = await request.json()
